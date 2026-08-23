@@ -1,26 +1,238 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================================
+   DEEP SPACE DESIGN TOKENS
+   One accent (starlight gold), locked across every section.
+   Radius system: cards/images 16px, inputs/buttons 10px, tags pill.
+   ============================================================ */
+
+@theme {
+  --color-space: #05060c;
+  --color-deep: #0a0d18;
+  --color-crater: #11152a;
+  --color-mist: #e9ebf4;
+  --color-dust: #a2a8c0;
+  --color-faint: #666d88;
+  --color-starlight: #e6b95f;
+  --color-starbright: #f3cf87;
+  --color-edge: #1c2135;
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html {
+  scroll-behavior: smooth;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-space);
+  color: var(--color-mist);
+}
+
+::selection {
+  background: rgb(230 185 95 / 0.28);
+  color: #fdf6e7;
+}
+
+/* Nebula haze: static atmosphere layer behind the whole page.
+   Fixed + pointer-events-none so it never repaints on scroll. */
+.nebula-haze {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 42% at 78% 12%, rgb(56 76 178 / 0.14), transparent 70%),
+    radial-gradient(ellipse 48% 38% at 12% 58%, rgb(148 84 211 / 0.09), transparent 72%),
+    radial-gradient(ellipse 62% 46% at 50% 108%, rgb(20 118 140 / 0.08), transparent 74%);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .nebula-haze {
+    display: none;
+  }
+}
+
+/* Film grain over everything, fixed so it never scrolls. */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Instrument-style mono label. Used sparingly (max ~3 sections). */
+.instrument-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-starlight);
+}
+
+/* Hairline section divider */
+.section-rule {
+  border-top: 1px solid rgb(233 235 244 / 0.07);
+}
+
+/* Link underline sweep */
+.link-sweep {
+  position: relative;
+}
+.link-sweep::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.link-sweep:hover::after,
+.link-sweep:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ============================================================
+   HERO BLACK HOLE - glow system.
+   Layered warm bloom + a breathing horizon halo sitting behind
+   and above the canvas accretion disk. Decorative only.
+   ============================================================ */
+
+/* Deep ambient bloom far behind the disk */
+.bh-bloom {
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(
+    closest-side,
+    rgb(230 185 95 / 0.22),
+    rgb(90 70 160 / 0.1) 55%,
+    transparent 76%
+  );
+  filter: blur(14px);
+  animation: bh-breathe 8s ease-in-out infinite;
+}
+
+/* Tight halo hugging the event horizon (horizon is 60px across) */
+.bh-halo {
+  position: absolute;
+  left: calc(50% - 52px);
+  top: calc(50% - 52px);
+  width: 104px;
+  height: 104px;
+  border-radius: 9999px;
+  background: radial-gradient(
+    closest-side,
+    rgb(243 207 135 / 0.32),
+    rgb(230 185 95 / 0.14) 55%,
+    transparent 74%
+  );
+  filter: blur(9px);
+  mix-blend-mode: screen;
+  animation: bh-breathe 5.5s ease-in-out infinite reverse;
+}
+
+/* Screen-blended warmth over the whole disk */
+.bh-warmth {
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgb(243 207 135 / 0.2),
+    transparent 56%
+  );
+  mix-blend-mode: screen;
+}
+
+@keyframes bh-breathe {
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.07);
+  }
+}
+
+/* Shiny pill: endless sheen sweep across the availability badge */
+.shiny-pill {
+  position: relative;
+  overflow: hidden;
+}
+.shiny-pill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 42%,
+    rgb(243 207 135 / 0.32) 50%,
+    transparent 58%
+  );
+  transform: translateX(-160%);
+  animation: shiny-sweep 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+@keyframes shiny-sweep {
+  0% {
+    transform: translateX(-160%);
+  }
+  55%,
+  100% {
+    transform: translateX(160%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bh-bloom,
+  .bh-halo,
+  .shiny-pill::after {
+    animation: none;
+  }
+}
+
+/* Form controls shared by contact + admin */
+.field-input {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid rgb(233 235 244 / 0.12);
+  background: rgb(233 235 244 / 0.03);
+  padding: 0.625rem 0.875rem;
+  font-size: 0.9375rem;
+  color: var(--color-mist);
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.field-input::placeholder {
+  color: var(--color-faint);
+}
+.field-input:focus-visible {
+  border-color: rgb(230 185 95 / 0.55);
+  box-shadow: 0 0 0 3px rgb(230 185 95 / 0.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
