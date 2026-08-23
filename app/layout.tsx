@@ -2,21 +2,28 @@ import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { getSettings } from "@/lib/queries";
+import { WebsiteStructuredData } from "@/components/structured-data";
 import "./globals.css";
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings();
+
   const description =
     settings.hero_subheadline ||
     `${settings.name}, ${settings.role_title.toLowerCase()}. ${settings.about_statement}`;
 
   return {
     metadataBase: new URL("https://heinminthant.com"),
+
     title: {
       default: `${settings.name} - ${settings.role_title}`,
       template: `%s | ${settings.name}`,
     },
+
     description,
+
+    applicationName: settings.name,
+
     keywords: [
       settings.name,
       "software engineer",
@@ -27,8 +34,16 @@ export async function generateMetadata(): Promise<Metadata> {
       "Next.js",
       "TypeScript",
     ],
-    authors: [{ name: settings.name, url: "https://heinminthant.com" }],
+
+    authors: [
+      {
+        name: settings.name,
+        url: "https://heinminthant.com",
+      },
+    ],
+
     creator: settings.name,
+
     openGraph: {
       title: `${settings.name} - ${settings.role_title}`,
       description,
@@ -37,11 +52,13 @@ export async function generateMetadata(): Promise<Metadata> {
       url: "https://heinminthant.com",
       siteName: settings.name,
     },
+
     twitter: {
       card: "summary_large_image",
       title: `${settings.name} - ${settings.role_title}`,
       description,
     },
+
     robots: {
       index: true,
       follow: true,
@@ -53,6 +70,7 @@ export async function generateMetadata(): Promise<Metadata> {
         "max-snippet": -1,
       },
     },
+
     alternates: {
       canonical: "https://heinminthant.com",
     },
@@ -66,7 +84,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${GeistSans.variable} ${GeistMono.variable} antialiased`}
     >
       <body className="bg-space text-mist">
+        <WebsiteStructuredData />
+
         {children}
+
         <div className="nebula-haze" aria-hidden="true" />
         <div className="grain-overlay" aria-hidden="true" />
       </body>

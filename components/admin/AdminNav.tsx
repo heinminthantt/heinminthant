@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link, { useLinkStatus } from "next/link";
 import { usePathname } from "next/navigation";
 
 const LINKS = [
@@ -14,6 +14,17 @@ const LINKS = [
   { href: "/admin/socials", label: "Social links" },
   { href: "/admin/messages", label: "Messages" },
 ];
+
+function PendingDot() {
+  const { pending } = useLinkStatus();
+  if (!pending) return null;
+  return (
+    <span
+      aria-hidden="true"
+      className="ml-1.5 inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-starlight align-middle"
+    />
+  );
+}
 
 export default function AdminNav() {
   const pathname = usePathname();
@@ -37,6 +48,7 @@ export default function AdminNav() {
             }`}
           >
             {link.label}
+            <PendingDot />
           </Link>
         );
       })}

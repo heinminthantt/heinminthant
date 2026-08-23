@@ -19,11 +19,11 @@ export default function Certificates({ certificates }: { certificates: Certifica
         </Reveal>
 
         <Reveal delay={0.1}>
-          <div className="-mx-6 mt-12 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-4 [scrollbar-width:thin]">
+          <div className="-mx-6 mt-12 flex gap-5 overflow-x-auto overscroll-x-contain px-6 pb-4 [scrollbar-width:thin]">
             {certificates.map((cert) => (
               <article
                 key={cert.id}
-                className="flex w-[300px] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-mist/[0.07] bg-deep/60 transition-colors duration-300 hover:border-starlight/25 sm:w-[340px]"
+                className="flex w-[300px] shrink-0 flex-col overflow-hidden rounded-2xl border border-mist/[0.07] bg-deep/60 transition-colors duration-300 hover:border-starlight/25 sm:w-[340px]"
               >
                 {cert.image_url ? (
                   <div className="relative aspect-[16/9]">
