@@ -13,13 +13,13 @@ export default async function AdminMessagesPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold tracking-tight text-mist">Messages</h1>
-      <p className="mt-2 text-sm text-dust">
+      <h1 className="text-2xl font-semibold tracking-tight text-ink">Messages</h1>
+      <p className="mt-2 text-sm text-muted">
         Submissions from the contact form on your site.
       </p>
 
       {messages.length === 0 ? (
-        <p className="mt-10 rounded-2xl border border-dashed border-mist/15 p-10 text-center text-sm text-faint">
+        <p className="mt-10 rounded-2xl border border-dashed border-white/15 p-10 text-center text-sm text-faint">
           No messages yet.
         </p>
       ) : (
@@ -29,23 +29,23 @@ export default async function AdminMessagesPage() {
               key={msg.id}
               className={`flex flex-col gap-3 rounded-2xl border p-6 ${
                 msg.read
-                  ? "border-mist/[0.07] bg-deep/40"
-                  : "border-starlight/25 bg-deep/70"
+                  ? "border-white/[0.07] bg-surface/40"
+                  : "border-accent/25 bg-surface/70"
               }`}
             >
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <p className="font-medium text-mist">
+                  <p className="font-medium text-ink">
                     {msg.name}
                     {!msg.read && (
-                      <span className="ml-2 rounded-full border border-starlight/40 px-2 py-0.5 align-middle font-mono text-[10px] uppercase tracking-wide text-starlight">
+                      <span className="ml-2 rounded-full border border-accent/40 px-2 py-0.5 align-middle font-mono text-[10px] uppercase tracking-wide text-accent">
                         New
                       </span>
                     )}
                   </p>
                   <a
                     href={`mailto:${msg.email}`}
-                    className="text-sm text-dust transition-colors hover:text-mist"
+                    className="text-sm text-muted transition-colors hover:text-ink"
                   >
                     {msg.email}
                   </a>
@@ -55,7 +55,7 @@ export default async function AdminMessagesPage() {
                 </p>
               </div>
 
-              <p className="whitespace-pre-wrap leading-relaxed text-dust">{msg.message}</p>
+              <p className="whitespace-pre-wrap leading-relaxed text-muted">{msg.message}</p>
 
               <div className="flex items-center gap-3 pt-1">
                 {!msg.read && (
@@ -63,7 +63,7 @@ export default async function AdminMessagesPage() {
                     <input type="hidden" name="id" value={msg.id} />
                     <button
                       type="submit"
-                      className="rounded-[10px] border border-mist/15 px-4 py-2 text-sm text-dust transition-colors hover:border-starlight/50 hover:text-starlight"
+                      className="rounded-[10px] border border-white/15 px-4 py-2 text-sm text-muted transition-colors hover:border-accent/50 hover:text-accent"
                     >
                       Mark as read
                     </button>

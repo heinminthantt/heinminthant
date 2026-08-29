@@ -8,10 +8,10 @@ export default async function AdminSettingsPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold tracking-tight text-mist">
+      <h1 className="text-2xl font-semibold tracking-tight text-ink">
         Hero & About
       </h1>
-      <p className="mt-2 text-sm text-dust">
+      <p className="mt-2 text-sm text-muted">
         These fields drive the hero section and about area of your site.
       </p>
       <div className="mt-10 max-w-2xl">

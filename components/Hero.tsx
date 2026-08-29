@@ -2,8 +2,6 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
-import BlackHole from "./BlackHole";
 
 interface HeroProps {
   roleTitle: string;
@@ -13,114 +11,68 @@ interface HeroProps {
   availabilityLabel: string;
 }
 
-export default function Hero({
-  roleTitle,
-  headline,
-  subheadline,
-  available,
-  availabilityLabel,
-}: HeroProps) {
+export default function Hero({ roleTitle, headline, subheadline, available, availabilityLabel }: HeroProps) {
   const reduce = useReducedMotion();
 
-  const container = {
-    hidden: {},
-    show: { transition: { staggerChildren: 0.12 } },
-  };
-  const item = {
-    hidden: reduce ? {} : { opacity: 0, y: 28 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const },
-    },
-  };
-
   return (
-    <section className="relative flex min-h-[100dvh] items-center overflow-hidden pt-16">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute right-[0%] top-1/2 hidden w-[min(48vw,640px)] -translate-y-1/2 md:block lg:right-[3%]"
-      >
-        {/* layered glow behind the black hole */}
-        <div className="bh-bloom inset-[-18%]" />
-        {/* halo hugging the event horizon (voidRadius 30 -> 60px sphere) */}
-        <div className="bh-halo" />
-        <BlackHole
-          showCenter
-          centre={{ voidRadius: 30, voidX: 50, voidY: 50 }}
-          colors={["#fff4dd", "#f3cf87", "#e6b95f", "#d99b45"]}
-          particleCount={900}
-          particleSize={4}
-          outerRadius={80}
-          tilt={-24}
-          tiltSideway={-14}
-          trail={42}
-          orbitSpeed={4}
-          pullSpeed={0}
-          style={{ width: "100%", aspectRatio: "1 / 1" }}
-        />
-        {/* warmth over the disk */}
-        <div className="bh-warmth pointer-events-none inset-[-10%]" />
+    <section className="border-b border-border bg-white">
+      <div className="mx-auto max-w-[1200px] px-4 py-10 sm:px-6 sm:py-14">
+        <motion.div
+          initial={reduce ? false : { opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        >
+          {/* Breadcrumb — one focus line, not competing pills */}
+          <div className="flex flex-wrap items-center gap-2 text-[13px] text-text-tertiary">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-white px-2.5 py-1 text-[12px] font-medium">
+              <span className={`h-2 w-2 rounded-full ${available ? "bg-[#2ecc71]" : "bg-text-tertiary"}`} aria-hidden /> {available ? availabilityLabel : "Not available"}
+            </span>
+            <span className="hidden sm:inline text-text-faint">·</span>
+            <span className="text-text-secondary">{roleTitle}</span>
+            <span className="hidden sm:inline text-text-faint">·</span>
+            <span>Yangon · Remote</span>
+          </div>
+
+          <h1 className="mt-5 max-w-[18ch] text-balance text-[42px] font-[800] leading-[0.98] tracking-[-0.04em] text-text sm:text-[58px] lg:text-[68px]">
+            {headline}
+          </h1>
+
+          <p className="mt-4 max-w-[58ch] text-[17px] leading-[1.6] text-text-secondary sm:text-[18px]">
+            {subheadline || "Software engineer building reliable systems that feel effortless. Clean architecture, calm interfaces, care in equal measure."}
+          </p>
+
+          {/* Properties — proof, not decoration; 2 pills max to keep single focus */}
+          <div className="mt-7 flex flex-wrap gap-2">
+            <span className="inline-flex items-center gap-1.5 rounded-[6px] border border-border bg-white px-3 py-1.5 text-[13px] shadow-[0_1px_1px_rgba(0,0,0,0.03)]">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#0b6e99]" aria-hidden />
+              <span className="text-text-tertiary">Stack</span>
+              <span className="font-medium text-text">Next.js · TypeScript · Supabase</span>
+            </span>
+            <span className="inline-flex items-center gap-1.5 rounded-[6px] border border-border bg-white px-3 py-1.5 text-[13px] shadow-[0_1px_1px_rgba(0,0,0,0.03)]">
+              <span className="text-text-tertiary">Reply</span>
+              <span className="font-medium text-text">Within 24h</span>
+            </span>
+          </div>
+
+          <div className="mt-7 flex flex-wrap items-center gap-3">
+            <Link
+              href="#work"
+              className="inline-flex items-center rounded-[6px] bg-text px-6 py-3 text-[14px] font-semibold tracking-[-0.01em] text-white shadow-[0_1px_2px_rgba(0,0,0,0.08)] hover:bg-accent-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-text"
+            >
+              View selected work
+            </Link>
+            <Link
+              href="#contact"
+              className="inline-flex items-center rounded-[6px] border border-border bg-white px-6 py-3 text-[14px] font-medium text-text hover:bg-bg-subtle focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-text"
+            >
+              Start a conversation
+            </Link>
+            <span className="hidden items-center gap-1.5 text-[13px] text-text-tertiary sm:inline-flex">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#0b6e99]" aria-hidden /> Updated today
+            </span>
+          </div>
+        </motion.div>
       </div>
-
-      <motion.div
-        variants={container}
-        initial="hidden"
-        animate="show"
-        className="relative z-10 mx-auto w-full max-w-6xl px-6 pb-20 md:pb-0"
-      >
-        <motion.div variants={item} className="mb-7">
-          <span className="shiny-pill inline-flex items-center gap-2.5 rounded-full border border-starlight/25 bg-starlight/[0.06] px-4 py-1.5">
-            <span className="relative flex h-2 w-2">
-              {available && (
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-starlight opacity-60" />
-              )}
-              <span
-                className={`relative inline-flex h-2 w-2 rounded-full ${
-                  available ? "bg-starlight" : "bg-faint"
-                }`}
-              />
-            </span>
-            <span className="font-mono text-xs tracking-[0.18em] uppercase text-dust">
-              {availabilityLabel}
-            </span>
-          </span>
-        </motion.div>
-
-        <motion.h1
-          variants={item}
-          className="max-w-[13ch] text-5xl font-semibold leading-[1.04] tracking-tighter text-mist sm:text-6xl lg:text-7xl"
-        >
-          {headline}
-        </motion.h1>
-
-        <motion.p
-          variants={item}
-          className="mt-6 max-w-[52ch] text-base leading-relaxed text-dust sm:text-lg"
-        >
-          {subheadline || `${roleTitle} crafting software that is useful, maintainable, and quietly dependable.`}
-        </motion.p>
-
-        <motion.div variants={item} className="mt-10 flex flex-wrap items-center gap-4">
-          <Link
-            href="#work"
-            className="group inline-flex items-center gap-2 rounded-[10px] bg-starlight px-6 py-3 text-sm font-medium text-space transition-all hover:bg-starbright active:-translate-y-px active:scale-[0.98]"
-          >
-            View work
-            <ArrowRight
-              size={15}
-              weight="bold"
-              className="transition-transform duration-300 group-hover:translate-x-0.5"
-            />
-          </Link>
-          <Link
-            href="#contact"
-            className="inline-flex items-center rounded-[10px] border border-mist/15 px-6 py-3 text-sm font-medium text-mist transition-colors hover:border-starlight/50 hover:text-starlight active:-translate-y-px active:scale-[0.98]"
-          >
-            Contact me
-          </Link>
-        </motion.div>
-      </motion.div>
     </section>
   );
 }

@@ -1,4 +1,3 @@
-import Starfield from "@/components/Starfield";
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -71,9 +70,8 @@ export default async function HomePage() {
   return (
     <div id="top" className="relative min-h-[100dvh] overflow-x-clip">
       <JsonLd data={structuredData} />
-      <Starfield />
       <Nav name={settings.name} />
-      <main className="relative z-10">
+      <main className="relative">
         <Hero
           roleTitle={settings.role_title}
           headline={settings.hero_headline}

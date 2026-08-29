@@ -132,7 +132,7 @@ function Chip({ label }: { label: string }) {
   return (
     <span
       aria-hidden="true"
-      className="inline-flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-[5px] border border-mist/15 font-mono text-[9px] uppercase leading-none text-faint"
+      className="inline-flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-[5px] border border-white/15 font-mono text-[9px] uppercase leading-none text-faint"
     >
       {label}
     </span>

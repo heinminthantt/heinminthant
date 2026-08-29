@@ -50,7 +50,7 @@ function EntityForm({
   return (
     <form
       action={formAction}
-      className="flex flex-col gap-5 rounded-2xl border border-starlight/20 bg-deep p-6"
+      className="flex flex-col gap-5 rounded-2xl border border-accent/20 bg-surface p-6"
     >
       {item && item.id != null && (
         <input type="hidden" name="id" value={String(item.id)} />
@@ -86,7 +86,7 @@ function EntityForm({
         <button
           type="button"
           onClick={onCancel}
-          className="rounded-[10px] px-4 py-2.5 text-sm text-dust transition-colors hover:text-mist"
+          className="rounded-[10px] px-4 py-2.5 text-sm text-muted transition-colors hover:text-ink"
         >
           Cancel
         </button>
@@ -110,14 +110,14 @@ export default function EntityManager({
   return (
     <div>
       <div className="mb-8 flex items-center justify-between gap-4">
-        <h1 className="text-2xl font-semibold tracking-tight text-mist">
+        <h1 className="text-2xl font-semibold tracking-tight text-ink">
           {entityLabel}
         </h1>
         {editing !== "new" && (
           <button
             type="button"
             onClick={() => setEditing("new")}
-            className="inline-flex items-center gap-2 rounded-[10px] bg-starlight px-4 py-2.5 text-sm font-medium text-space transition-all hover:bg-starbright active:-translate-y-px active:scale-[0.98]"
+            className="inline-flex items-center gap-2 rounded-[10px] bg-accent px-4 py-2.5 text-sm font-medium text-bg transition-all hover:bg-accent-strong active:-translate-y-px active:scale-[0.98]"
           >
             <Plus size={15} weight="bold" aria-hidden="true" />
             Add new
@@ -138,7 +138,7 @@ export default function EntityManager({
       )}
 
       {items.length === 0 && editing === null && (
-        <p className="rounded-2xl border border-dashed border-mist/15 p-10 text-center text-sm text-faint">
+        <p className="rounded-2xl border border-dashed border-white/15 p-10 text-center text-sm text-faint">
           Nothing here yet. Use &quot;Add new&quot; to create your first entry.
         </p>
       )}
@@ -164,7 +164,7 @@ export default function EntityManager({
           return (
             <li
               key={String(item.id)}
-              className="flex items-center gap-4 rounded-2xl border border-mist/[0.07] bg-deep/60 p-4"
+              className="flex items-center gap-4 rounded-2xl border border-white/[0.07] bg-surface/60 p-4"
             >
               {imageKey && (
                 <div
@@ -177,10 +177,10 @@ export default function EntityManager({
                 />
               )}
               <div className="min-w-0 flex-1">
-                <p className="truncate font-medium text-mist">
+                <p className="truncate font-medium text-ink">
                   {String(item[summaryPrimary] ?? "")}
                   {item.visible === false && (
-                    <span className="ml-2 rounded-full border border-mist/15 px-2 py-0.5 align-middle font-mono text-[10px] uppercase tracking-wide text-faint">
+                    <span className="ml-2 rounded-full border border-white/15 px-2 py-0.5 align-middle font-mono text-[10px] uppercase tracking-wide text-faint">
                       Hidden
                     </span>
                   )}
@@ -195,7 +195,7 @@ export default function EntityManager({
                 type="button"
                 onClick={() => setEditing(itemId)}
                 aria-label={`Edit ${entityLabel} entry`}
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px] text-dust transition-colors hover:bg-mist/5 hover:text-mist"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px] text-muted transition-colors hover:bg-ink/5 hover:text-ink"
               >
                 <PencilSimple size={16} />
               </button>

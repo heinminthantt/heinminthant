@@ -11,10 +11,10 @@ export default function AdminLoginPage() {
     <div className="relative flex min-h-[100dvh] items-center justify-center px-6">
       <div className="w-full max-w-sm">
         <div className="mb-8 flex flex-col items-center gap-3 text-center">
-          <span className="flex h-12 w-12 items-center justify-center rounded-full border border-starlight/30 bg-starlight/[0.06]">
-            <LockKey size={20} className="text-starlight" aria-hidden="true" />
+          <span className="flex h-12 w-12 items-center justify-center rounded-full border border-accent/30 bg-accent/[0.06]">
+            <LockKey size={20} className="text-accent" aria-hidden="true" />
           </span>
-          <h1 className="text-xl font-semibold tracking-tight text-mist">
+          <h1 className="text-xl font-semibold tracking-tight text-ink">
             Mission Control
           </h1>
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-faint">
@@ -22,9 +22,9 @@ export default function AdminLoginPage() {
           </p>
         </div>
 
-        <form action={formAction} className="flex flex-col gap-5 rounded-2xl border border-mist/10 bg-deep/70 p-7 backdrop-blur">
+        <form action={formAction} className="flex flex-col gap-5 rounded-2xl border border-white/10 bg-surface/70 p-7 backdrop-blur">
           <div className="flex flex-col gap-2">
-            <label htmlFor="password" className="text-sm text-dust">
+            <label htmlFor="password" className="text-sm text-muted">
               Password
             </label>
             <input
@@ -46,7 +46,7 @@ export default function AdminLoginPage() {
 
           <button
             type="submit"
-            className="rounded-[10px] bg-starlight px-5 py-3 text-sm font-medium text-space transition-all hover:bg-starbright active:-translate-y-px active:scale-[0.98]"
+            className="rounded-[10px] bg-accent px-5 py-3 text-sm font-medium text-bg transition-all hover:bg-accent-strong active:-translate-y-px active:scale-[0.98]"
           >
             Enter
           </button>

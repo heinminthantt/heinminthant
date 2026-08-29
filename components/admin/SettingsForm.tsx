@@ -54,7 +54,7 @@ export default function SettingsForm({ values }: { values: SettingsValues }) {
       )}
 
       <section className="flex flex-col gap-5">
-        <h2 className="text-lg font-semibold text-mist">Identity</h2>
+        <h2 className="text-lg font-semibold text-ink">Identity</h2>
         <div className="grid gap-5 sm:grid-cols-2">
           <Field def={{ name: "name", label: "Full name", type: "text", half: true, required: true }} defaultValue={values.name} />
           <Field def={{ name: "role_title", label: "Role / title", type: "text", half: true }} defaultValue={values.role_title} />
@@ -66,8 +66,8 @@ export default function SettingsForm({ values }: { values: SettingsValues }) {
         <Field def={{ name: "resume_url", label: "Résumé link (PDF URL)", type: "url", placeholder: "https://..." }} defaultValue={values.resume_url} />
       </section>
 
-      <section className="flex flex-col gap-5 border-t border-mist/[0.07] pt-10">
-        <h2 className="text-lg font-semibold text-mist">Hero section</h2>
+      <section className="flex flex-col gap-5 border-t border-white/[0.07] pt-10">
+        <h2 className="text-lg font-semibold text-ink">Hero section</h2>
         <Field
           def={{
             name: "hero_headline",
@@ -98,8 +98,8 @@ export default function SettingsForm({ values }: { values: SettingsValues }) {
         </div>
       </section>
 
-      <section className="flex flex-col gap-5 border-t border-mist/[0.07] pt-10">
-        <h2 className="text-lg font-semibold text-mist">About</h2>
+      <section className="flex flex-col gap-5 border-t border-white/[0.07] pt-10">
+        <h2 className="text-lg font-semibold text-ink">About</h2>
         <Field
           def={{ name: "about_statement", label: "Large statement", type: "textarea" }}
           defaultValue={values.about_statement}
@@ -138,7 +138,7 @@ export default function SettingsForm({ values }: { values: SettingsValues }) {
             <img
               src={values.avatar_url}
               alt="Current avatar"
-              className="h-14 w-14 rounded-full border border-mist/15 object-cover"
+              className="h-14 w-14 rounded-full border border-white/15 object-cover"
             />
             <span className="text-xs text-faint">Current avatar</span>
           </div>

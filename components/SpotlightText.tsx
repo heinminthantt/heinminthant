@@ -49,7 +49,7 @@ export default function SpotlightText({
       className={`relative ${className ?? ""}`}
     >
       {/* Dimmed base once the spotlight is engaged */}
-      <span aria-hidden="true" className={engaged ? "text-mist/35" : ""}>
+      <span aria-hidden="true" className={engaged ? "text-ink/35" : ""}>
         {children}
       </span>
 
@@ -57,7 +57,7 @@ export default function SpotlightText({
       {engaged && (
         <span
           aria-hidden="true"
-          className="absolute inset-0 text-mist"
+          className="absolute inset-0 text-ink"
           style={{
             maskImage: mask,
             WebkitMaskImage: mask,

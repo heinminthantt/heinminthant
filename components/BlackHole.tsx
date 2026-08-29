@@ -37,21 +37,21 @@ type Props = {
     centre?: Centre // grouped in a modal, shown only when showCenter is on
     // Particles
     particleCount?: number
-    particleSize?: number // 1–100 (divided by 20 inside → 0.05–5 effective px)
+    particleSize?: number // 1-100 (divided by 20 inside → 0.05-5 effective px)
     colors?: string[]
-    outerRadius?: number // 0–100 % of half-canvas (0 = at center, 100 = full)
+    outerRadius?: number // 0-100 % of half-canvas (0 = at center, 100 = full)
     tilt?: number
     tiltSideway?: number
-    trail?: number // 0–50 (0 = no trail, 50 = max trail)
+    trail?: number // 0-50 (0 = no trail, 50 = max trail)
     // Motion
     orbitSpeed?: number
-    pullSpeed?: number // 0–20 (divided by 2 inside → 0–10 effective; 20 = old 100)
+    pullSpeed?: number // 0-20 (divided by 2 inside → 0-10 effective; 20 = old 100)
     style?: React.CSSProperties
 }
 
 // ─── Constants ───────────────────────────────────────────────
 
-const BG = "#000000" // Stage background — void fill & halo both match this
+const BG = "#000000" // Stage background - void fill & halo both match this
 const PERSPECTIVE = 1300 // Fixed 3D projection depth (no longer a control)
 
 // ─── Defaults ────────────────────────────────────────────────
@@ -80,7 +80,7 @@ const DEFAULTS = {
 
 function BlackHoleBase(props: Props) {
     props = { ...COMPONENT_DEFAULTS, ...props }
-    // Flat variables — destructure directly with defaults
+    // Flat variables - destructure directly with defaults
     const {
         showCenter = DEFAULTS.showCenter,
         centre,
@@ -111,10 +111,10 @@ function BlackHoleBase(props: Props) {
     const perspective = PERSPECTIVE
 
     // Map whole-number slider values to effective render values
-    // Particle size 1–50 → 0.5–4.5 px (1 = old "10", 50 = old "90")
+    // Particle size 1-50 → 0.5-4.5 px (1 = old "10", 50 = old "90")
     const particleSize =
         0.5 + (Math.max(1, Math.min(50, particleSizeRaw ?? 20)) - 1) * (4 / 49)
-    const pullSpeed = Math.max(0, pullSpeedRaw ?? 1) / 2 // 0–20 → 0–10
+    const pullSpeed = Math.max(0, pullSpeedRaw ?? 1) / 2 // 0-20 → 0-10
     // Trail: 0 = clear every frame (no trail), 50 = slow fade (max trail)
     const trailAlpha = Math.max(
         0.02,
@@ -171,7 +171,7 @@ function BlackHoleBase(props: Props) {
         []
     )
 
-    // Seed particles already in place — on mount, when params change, and
+    // Seed particles already in place - on mount, when params change, and
     // (via sizeVersion) as soon as the true canvas size is known
     useEffect(() => {
         const { w, h } = sizeRef.current

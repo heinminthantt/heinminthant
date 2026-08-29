@@ -25,7 +25,7 @@ export function Field({
     return (
       <label
         htmlFor={id}
-        className="flex cursor-pointer items-center gap-3 text-sm text-dust"
+        className="flex cursor-pointer items-center gap-3 text-sm text-muted"
       >
         <input
           id={id}
@@ -41,7 +41,7 @@ export function Field({
 
   return (
     <div className={`flex flex-col gap-2 ${def.half ? "" : "sm:col-span-2"}`}>
-      <label htmlFor={id} className="text-sm text-dust">
+      <label htmlFor={id} className="text-sm text-muted">
         {def.label}
       </label>
       {def.type === "textarea" ? (
@@ -69,7 +69,7 @@ export function Field({
               ? String(defaultValue)
               : ""
           }
-          className="field-input file:mr-3 file:rounded-md file:border-0 file:bg-mist/10 file:px-3 file:py-1.5 file:text-xs file:text-mist"
+          className="field-input file:mr-3 file:rounded-md file:border-0 file:bg-ink/10 file:px-3 file:py-1.5 file:text-xs file:text-ink"
         />
       )}
     </div>
@@ -82,7 +82,7 @@ export function SubmitButton({ label = "Save" }: { label?: string }) {
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex items-center rounded-[10px] bg-starlight px-5 py-2.5 text-sm font-medium text-space transition-all hover:bg-starbright active:-translate-y-px active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
+      className="inline-flex items-center rounded-[10px] bg-accent px-5 py-2.5 text-sm font-medium text-bg transition-all hover:bg-accent-strong active:-translate-y-px active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
     >
       {pending ? "Saving..." : label}
     </button>
