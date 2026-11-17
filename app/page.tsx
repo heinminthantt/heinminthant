@@ -48,6 +48,7 @@ export default async function HomePage() {
         "@id": "https://heinminthant.com/#website",
         url: "https://heinminthant.com",
         name: settings.name,
+        alternateName: ["heinminthant.com"],
         description: settings.about_statement,
         publisher: { "@id": "https://heinminthant.com/#person" },
       },
