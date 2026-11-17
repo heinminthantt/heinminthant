@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { getSettings } from "@/lib/queries";
-import { WebsiteStructuredData } from "@/components/structured-data";
 import "./globals.css";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -42,7 +41,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             FIRST VIEWPORT: Clean header — breadcrumb (availability·role·Yangon), 52px title, Stack/Reply proof pills (2 max), primary View work dominant + secondary conversation, Updated today — no canvas, hierarchy does selling.
             FORM: Notion refinement — P0-P1 polish (cover trap + toolkit scroll + contact fracture + IA order), adapt (board/tables stack <lg), restrained colorize, layout rhythm varied (Hero 10/14, Toolkit 8/10, Projects 12/14, Contact 12/16); seed 79afa416 acknowledged, rebuild not needed.
             FINISH: unreviewed and undocumented is unfinished; this build ends with detect, build, screenshots, verdict, and DESIGN.md */}
-        <WebsiteStructuredData />
         {children}
       </body>
     </html>
