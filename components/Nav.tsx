@@ -24,7 +24,7 @@ export default function Nav({ name, available, availabilityLabel }: { name: stri
       animate={{ y: 0, opacity: 1, x: "-50%" }}
       transition={{ type: "spring", stiffness: 140, damping: 18, delay: 0.5 }}
     >
-      <div className="flex items-center gap-2 rounded-[22px] bg-white/95 p-2 shadow-[0_12px_36px_rgba(0,0,0,0.22)] ring-1 ring-black/5 nav-blur">
+      <div className="liquid-glass flex items-center gap-2 rounded-[24px] p-2">
         {ITEMS.map((item) => {
           const Icon = item.icon;
           return (
@@ -38,8 +38,9 @@ export default function Nav({ name, available, availabilityLabel }: { name: stri
               whileTap={reduce ? undefined : { scale: 0.9 }}
               transition={{ type: "spring", stiffness: 320, damping: 15 }}
             >
-              <span className={`relative flex h-11 w-11 items-center justify-center rounded-[14px] ${item.bg} text-[#111] shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_3px_8px_rgba(0,0,0,0.15)]`}>
-                <Icon size={22} weight="fill" aria-hidden />
+              <span className={`relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-[14px] ${item.bg} text-[#111] shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_3px_8px_rgba(0,0,0,0.15)]`}>
+                <span className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/50 via-white/10 to-transparent" aria-hidden />
+                <Icon size={22} weight="fill" aria-hidden className="relative" />
                 {item.badge && <span className="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-[#E53935] text-[11px] font-bold text-white ring-2 ring-white">{item.badge}</span>}
               </span>
             </MotionLink>
