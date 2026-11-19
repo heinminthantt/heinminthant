@@ -139,9 +139,11 @@ export default function Hero({ roleTitle, headline, subheadline, available, avai
             {name}<sup className="ml-0.5 text-[11px]">®</sup>
           </motion.p>
 
-          {/* Left badge - desktop absolute feel via row on large, centered on mobile */}
-          <div className="mt-8 flex justify-center lg:absolute lg:left-6 lg:top-[34%] lg:mt-0 lg:justify-start">
-            <motion.div variants={badgeVar} className="flex items-center gap-3 rounded-full border border-white/50 bg-white/20 py-2 pl-2 pr-5 shadow-lg backdrop-blur-md">
+          {/* Availability badge - top-left under the wordmark on desktop,
+              centered in flow on mobile; z-30 + liquid glass so it floats
+              OVER the headline, never behind it */}
+          <div className="z-30 mt-8 flex justify-center lg:absolute lg:left-8 lg:top-[104px] lg:mt-0 lg:justify-start">
+            <motion.div variants={badgeVar} className="liquid-glass flex items-center gap-3 rounded-full py-2 pl-2 pr-5">
               {avatarUrl ? (
                 <span className="relative block h-11 w-11 shrink-0 overflow-hidden rounded-full ring-2 ring-white">
                   <Image src={avatarUrl} alt={`Portrait of ${name}`} fill className="object-cover" sizes="44px" />
@@ -151,8 +153,8 @@ export default function Hero({ roleTitle, headline, subheadline, available, avai
                 <span className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#111] text-[13px] font-bold text-white ring-2 ring-white">{initials}<span className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-[#2ecc71] ring-2 ring-white" aria-hidden /></span>
               )}
               <span className="text-left leading-tight">
-                <span className="block text-[13px] font-bold text-white [text-shadow:0_1px_6px_rgba(0,0,0,0.25)]">{available ? availabilityLabel : "Not available"}</span>
-                <span className="block text-[12px] font-semibold uppercase tracking-wide text-white/90">{name} · {roleTitle}</span>
+                <span className="block text-[13px] font-bold text-[#111]">{available ? availabilityLabel : "Not available"}</span>
+                <span className="block text-[12px] font-semibold uppercase tracking-wide text-[#111]/70">{name} · {roleTitle}</span>
               </span>
             </motion.div>
           </div>
@@ -172,7 +174,7 @@ export default function Hero({ roleTitle, headline, subheadline, available, avai
             </motion.div>
           </div>
 
-          <div className="mt-6 flex justify-center lg:absolute lg:right-6 lg:top-[36%] lg:mt-0">
+          <div className="z-30 mt-6 flex justify-center lg:absolute lg:right-6 lg:top-[36%] lg:mt-0">
             <StickerLabels className="max-w-[300px] justify-center lg:flex-col lg:items-end" />
           </div>
 
