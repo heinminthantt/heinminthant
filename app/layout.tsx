@@ -35,11 +35,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable} antialiased`}>
       <body className="bg-bg text-text">
-        {/* THESIS: A Notion doc that proves shipping — white doc + 8px + Geist carries hierarchy, blue provenance (#0b6e99/#e9f3f7) owns featured/select/callout at system scale.
-            OWN-WORLD: Restrained — #fff/#f7f7f5/#e9e9e9 + #37352f/#111, 8px radius, 0 1px 2px shadow, Geist 700/500/400, 60-62ch measure, left-aligned; cover removed, yellow/red only as select, no glow.
-            STORY: Cold hiring manager + freelance client gets in one scroll: who Hein is (About), what he knows (Toolkit grid-as-select), what he shipped (featured editorial row + gallery), how he worked (mini timeline + table/cards adaptive), decisive Contact split 01/02/03.
-            FIRST VIEWPORT: Clean header — breadcrumb (availability·role·Yangon), 52px title, Stack/Reply proof pills (2 max), primary View work dominant + secondary conversation, Updated today — no canvas, hierarchy does selling.
-            FORM: Notion refinement — P0-P1 polish (cover trap + toolkit scroll + contact fracture + IA order), adapt (board/tables stack <lg), restrained colorize, layout rhythm varied (Hero 10/14, Toolkit 8/10, Projects 12/14, Contact 12/16); seed 79afa416 acknowledged, rebuild not needed.
+        {/* THESIS: Creatie-inspired playful scrapbook / sticker-book portfolio — warm cream + graph paper, huge ALL-CAPS grotesque headlines, tilted sticker cards, pushpins, pastel bars, bottom dock nav, adapted to Hein's real content as a software engineer.
+            VECTOR BACKGROUND FIX: the template's scenic backgrounds were stretched low-quality raster photos. Here every scenic background is a crisp inline SVG scene (components/HillsScene.tsx: sky gradient, sun, layered green hills, one white cloud, flower speckles) plus a subtle SVG grain overlay, sharp at any size, used in Hero, Projects and the Footer CTA. No external stock or template images as backgrounds.
+            OWN-WORLD: Cream #F4F1EA + graph paper #FDF6E3 with pale-blue grid, ink #111, accents lime #C6F135 / mustard #E3D44A / dusty blue #6B93A8 / pink #F5B8D0 / pale blue #BFE3F5 / mint #C8F0D8 / pale yellow #FFF3B0, cards rounded 24-32px tilted ±2-6deg with soft shadows.
+            STORY: Hero over the hills (wordmark, availability badge, sticker labels, fanned project cards, googly eyes), black marquee, About with real computed stats, Projects as browser-window cards over the hills, pastel Services bars, Toolkit / Journey / Certificates on graph paper, FAQ pastel pills, Contact, then a pale-yellow footer with a HillsScene CTA card.
             FINISH: unreviewed and undocumented is unfinished; this build ends with detect, build, screenshots, verdict, and DESIGN.md */}
         {children}
       </body>

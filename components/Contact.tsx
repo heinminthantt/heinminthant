@@ -2,69 +2,44 @@ import type { SiteSettings, SocialLink } from "@/lib/types";
 import { EnvelopeSimple, MapPin, NotePencil } from "@phosphor-icons/react/dist/ssr";
 import Reveal from "./Reveal";
 import ContactForm from "./ContactForm";
+import { SectionPill, headingCls } from "./Doodles";
 
 interface ContactProps { settings: SiteSettings; socials: SocialLink[]; }
 
 export default function Contact({ settings, socials }: ContactProps) {
   return (
-    <section id="contact" className="bg-white">
-      <div className="mx-auto max-w-[1200px] px-4 py-12 sm:px-6 sm:py-16">
+    <section id="contact" className="bg-[#F4F1EA]">
+      <div className="mx-auto max-w-[1200px] px-4 py-24 sm:px-6 sm:py-32">
         <Reveal>
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="flex h-7 w-7 items-center justify-center rounded-[7px] border border-border bg-white text-text shadow-sm" aria-hidden>
-              <EnvelopeSimple size={15} weight="regular" />
-            </span>
-            <h2 className="text-[20px] font-[700] tracking-[-0.02em] text-text">Contact</h2>
-            <span className="rounded-full border border-border bg-bg-subtle px-2.5 py-1 text-[11px] font-medium tracking-wide text-text-tertiary">Reply within 24h</span>
-            <span className="ml-auto hidden text-[12px] text-text-tertiary sm:inline">Let’s talk →</span>
-          </div>
+          <SectionPill bg="bg-[#F5B8D0]">Contact</SectionPill>
+          <h2 className={`${headingCls} mt-5`}>Let&apos;s build<br />something useful.</h2>
+          <p className="mt-3 inline-flex rounded-full bg-white px-4 py-1.5 text-[12px] font-bold uppercase tracking-wide text-[#111] shadow-sm">Reply within 24h</p>
         </Reveal>
-
-        <div className="mt-6 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+        <div className="mt-12 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
           <Reveal>
-            <div className="rounded-[8px] border border-[#d3e5ef] bg-blue-bg p-5">
-              <h3 className="max-w-[18ch] text-[20px] font-semibold leading-tight tracking-[-0.015em] text-blue sm:text-[22px]">Let’s build something useful.</h3>
-              <p className="mt-2 max-w-[42ch] text-[14px] leading-[1.6] text-blue/80">Have a project in mind, a role to fill, or just want to talk shop? My inbox is always open. I reply within 24 hours.</p>
-
-              <div className="mt-5 flex flex-col gap-2 text-[13px]">
-                {settings.email && (
-                  <a href={`mailto:${settings.email}`} className="inline-flex w-fit items-center gap-1.5 rounded-[6px] bg-white px-3 py-2 text-[13px] font-medium text-text shadow-sm hover:bg-white">
-                    <EnvelopeSimple size={14} weight="regular" aria-hidden /> {settings.email}
-                  </a>
-                )}
-                {settings.location && (
-                  <span className="inline-flex items-center gap-1.5 text-[13px] text-blue/70">
-                    <MapPin size={14} weight="regular" aria-hidden /> {settings.location}
-                  </span>
-                )}
-                <div className="mt-2 flex flex-wrap gap-1.5">
-                  {socials.map((s) => (
-                    <a key={s.id} href={s.url} target="_blank" rel="noopener noreferrer" className="rounded-[6px] bg-white px-3 py-1.5 text-[13px] font-medium text-text shadow-sm hover:bg-white">
-                      {s.platform}
-                    </a>
-                  ))}
-                </div>
+            <div className="rounded-[28px] bg-[#BFE3F5] p-6 shadow-[0_14px_34px_rgba(60,55,20,0.10)] sm:p-7">
+              <p className="max-w-[42ch] text-[16px] leading-[1.65] text-[#174a63]">Have a project in mind, a role to fill, or just want to talk shop? My inbox is always open. I reply within 24 hours.</p>
+              <div className="mt-6 flex flex-col gap-3">
+                {settings.email && <a href={`mailto:${settings.email}`} className="inline-flex w-fit min-h-[44px] items-center gap-2 rounded-full bg-white px-4 py-2 text-[14px] font-bold text-[#111] shadow"><EnvelopeSimple size={16} /> {settings.email}</a>}
+                {settings.location && <span className="inline-flex items-center gap-2 text-[14px] font-semibold text-[#174a63]"><MapPin size={16} /> {settings.location}</span>}
+                <div className="flex flex-wrap gap-2">{socials.map((s) => <a key={s.id} href={s.url} target="_blank" rel="noopener noreferrer" className="rounded-full bg-white px-4 py-2 text-[13px] font-bold text-[#111] shadow-sm">{s.platform}</a>)}</div>
               </div>
             </div>
-
-            <div className="mt-4 rounded-[8px] border border-border bg-bg-subtle p-4 text-[13px] leading-[1.6] text-text-secondary">
-              <p className="text-[12px] font-semibold tracking-wide text-text">What happens next</p>
-              <ol className="mt-2 space-y-1.5">
-                <li className="flex gap-2"><span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white text-[11px] font-medium tabular text-text-tertiary shadow-sm">01</span> You send a short note about the goal.</li>
-                <li className="flex gap-2"><span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white text-[11px] font-medium tabular text-text-tertiary shadow-sm">02</span> I reply with scope and next steps within a day.</li>
-                <li className="flex gap-2"><span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white text-[11px] font-medium tabular text-text-tertiary shadow-sm">03</span> We start with a small, focused slice.</li>
+            <div className="mt-5 rounded-[28px] bg-white p-6 shadow-[0_14px_34px_rgba(60,55,20,0.08)]">
+              <p className="text-[13px] font-extrabold uppercase tracking-wider text-[#111]">What happens next</p>
+              <ol className="mt-4 space-y-3.5">
+                {["You send a short note about the goal.", "I reply with scope and next steps within a day.", "We start with a small, focused slice."].map((step, i) => (
+                  <li key={step} className="flex items-start gap-3 text-[14.5px] leading-[1.55] text-[#55584E]"><span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#C6F135] text-[12px] font-extrabold tabular text-[#111]">{String(i + 1).padStart(2, "0")}</span>{step}</li>
+                ))}
               </ol>
             </div>
           </Reveal>
-
           <Reveal delay={0.06}>
-            <div className="rounded-[8px] border border-border bg-white p-5 shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
-              <div className="mb-4 flex items-center gap-2 border-b border-border pb-3">
-                <span className="flex h-6 w-6 items-center justify-center rounded-[6px] border border-border bg-bg-subtle text-text" aria-hidden>
-                  <NotePencil size={14} weight="regular" />
-                </span>
-                <span className="text-[13px] font-semibold text-text">New message</span>
-                <span className="ml-auto rounded-[4px] bg-bg-subtle px-2 py-0.5 text-[11px] text-text-tertiary">Required *</span>
+            <div className="rounded-[28px] bg-white p-6 shadow-[0_18px_44px_rgba(60,55,20,0.12)] sm:p-7">
+              <div className="mb-5 flex items-center gap-2 border-b border-[#E2DDCE] pb-4">
+                <span className="flex h-9 w-9 items-center justify-center rounded-[12px] bg-[#FFF3B0] text-[#111]"><NotePencil size={18} /></span>
+                <span className="text-[15px] font-extrabold text-[#111]">New message</span>
+                <span className="ml-auto rounded-full bg-[#F4F1EA] px-3 py-1 text-[11px] font-bold text-[#7A7D6F]">Required *</span>
               </div>
               <ContactForm />
             </div>

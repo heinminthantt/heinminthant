@@ -12,7 +12,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-[6px] bg-text px-5 py-2.5 text-[14px] font-medium text-white shadow-[0_1px_2px_rgba(0,0,0,0.06)] hover:bg-accent-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-text disabled:opacity-50 disabled:cursor-not-allowed"
+      className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full bg-[#111111] px-6 py-3 text-[14px] font-bold text-white shadow-[0_8px_20px_rgba(0,0,0,0.16)] hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-text disabled:opacity-50 disabled:cursor-not-allowed"
       aria-busy={pending}
     >
       {pending ? (

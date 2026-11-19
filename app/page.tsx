@@ -1,10 +1,13 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
+import Marquee from "@/components/Marquee";
 import About from "@/components/About";
 import Toolkit from "@/components/Toolkit";
 import Projects from "@/components/Projects";
+import Services from "@/components/Services";
 import Journey from "@/components/Journey";
 import Certificates from "@/components/Certificates";
+import Faq from "@/components/Faq";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import {
@@ -69,9 +72,9 @@ export default async function HomePage() {
   };
 
   return (
-    <div id="top" className="relative min-h-[100dvh] overflow-x-clip">
+    <div id="top" className="relative min-h-[100dvh] overflow-x-clip bg-[#F4F1EA]">
       <JsonLd data={structuredData} />
-      <Nav name={settings.name} />
+      <Nav name={settings.name} available={settings.available} availabilityLabel={settings.availability_label} />
       <main className="relative">
         <Hero
           roleTitle={settings.role_title}
@@ -79,15 +82,21 @@ export default async function HomePage() {
           subheadline={settings.hero_subheadline}
           available={settings.available}
           availabilityLabel={settings.availability_label}
+          avatarUrl={settings.avatar_url}
+          name={settings.name}
+          projects={projects}
         />
-        <About settings={settings} />
-        <Toolkit skills={skills} />
+        <Marquee />
+        <About settings={settings} projectCount={projects.length} skillCount={skills.length} certificateCount={certificates.length} />
         <Projects projects={projects} />
+        <Services />
+        <Toolkit skills={skills} />
         <Journey experience={experience} education={education} />
         <Certificates certificates={certificates} />
+        <Faq />
         <Contact settings={settings} socials={socials} />
       </main>
-      <Footer name={settings.name} socials={socials} />
+      <Footer name={settings.name} socials={socials} email={settings.email} />
     </div>
   );
 }
