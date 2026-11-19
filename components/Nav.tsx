@@ -1,98 +1,52 @@
 "use client";
-
-import { useState, useEffect } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
+import { User, FolderOpen, Star, ChatCircleText, House } from "@phosphor-icons/react";
 
-const LINKS = [
-  { href: "/#about", label: "About" },
-  { href: "/#toolkit", label: "Toolkit" },
-  { href: "/#work", label: "Work" },
-  { href: "/#journey", label: "Journey" },
-  { href: "/#certificates", label: "Certs" },
-  { href: "/#contact", label: "Contact" },
+const ITEMS = [
+  { href: "/#top", label: "Home", icon: House, bg: "bg-[#C6F135]" },
+  { href: "/#about", label: "About", icon: User, bg: "bg-[#C9B8FF]" },
+  { href: "/#work", label: "Projects", icon: FolderOpen, bg: "bg-[#BFE3F5]" },
+  { href: "/#services", label: "Services", icon: Star, bg: "bg-[#FF9F43]" },
+  { href: "/#contact", label: "Contact", icon: ChatCircleText, bg: "bg-[#8ECDF0]", badge: "1" },
 ];
 
-export default function Nav({ name }: { name: string }) {
-  const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+const MotionLink = motion.create(Link);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
+export default function Nav({ name, available, availabilityLabel }: { name: string; available?: boolean; availabilityLabel?: string }) {
+  void name; void available; void availabilityLabel;
+  const reduce = useReducedMotion();
   return (
-    <header className={`sticky top-0 z-40 border-b bg-white/80 nav-blur ${scrolled ? "border-border" : "border-transparent"}`}>
-      <div className="mx-auto flex h-[52px] max-w-[1200px] items-center justify-between gap-6 px-4 sm:px-6">
-        <Link href="/" className="flex items-center gap-2.5 text-[14px] font-medium tracking-[-0.01em] text-text">
-          <span className="flex h-[22px] w-[22px] items-center justify-center rounded-[5px] bg-text text-[12px] font-semibold leading-none text-white">H</span>
-          <span className="hidden sm:inline">{name}</span>
-          <span className="hidden text-text-tertiary sm:inline">/</span>
-          <span className="hidden text-text-secondary sm:inline">Portfolio</span>
-        </Link>
-
-        <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Primary">
-          {LINKS.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className="rounded-[6px] px-2.5 py-1.5 text-[13px] font-medium text-text-secondary hover:bg-bg-subtle hover:text-text focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-text"
+    <motion.nav
+      aria-label="Primary"
+      className="fixed bottom-4 left-1/2 z-50 sm:bottom-6"
+      initial={reduce ? false : { y: 80, opacity: 0, x: "-50%" }}
+      animate={{ y: 0, opacity: 1, x: "-50%" }}
+      transition={{ type: "spring", stiffness: 140, damping: 18, delay: 0.5 }}
+    >
+      <div className="liquid-glass flex items-center gap-2 rounded-[24px] p-2">
+        {ITEMS.map((item) => {
+          const Icon = item.icon;
+          return (
+            <MotionLink
+              key={item.label}
+              href={item.href}
+              aria-label={item.label}
+              title={item.label}
+              className="relative flex min-h-[44px] min-w-[44px] items-center justify-center"
+              whileHover={reduce ? undefined : { scale: 1.14, y: -5 }}
+              whileTap={reduce ? undefined : { scale: 0.9 }}
+              transition={{ type: "spring", stiffness: 320, damping: 15 }}
             >
-              {l.label}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="flex items-center gap-2">
-          <Link
-            href="#contact"
-            className="hidden rounded-[6px] bg-text px-3.5 py-2 text-[14px] font-medium text-white hover:bg-accent-hover lg:inline-flex"
-          >
-            Contact
-          </Link>
-
-          <button
-            type="button"
-            onClick={() => setOpen((v) => !v)}
-            aria-expanded={open}
-            aria-label={open ? "Close menu" : "Open menu"}
-            aria-controls="mobile-nav"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-[6px] border border-border bg-white text-text shadow-sm hover:bg-bg-subtle focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-text lg:hidden"
-          >
-            <span className="relative block h-3 w-3">
-              <span className={`absolute left-0 top-0 h-[1.5px] w-3 bg-current transition-all ${open ? "translate-y-[5px] rotate-45" : ""}`} />
-              <span className={`absolute left-0 top-[5px] h-[1.5px] w-3 bg-current transition-opacity ${open ? "opacity-0" : "opacity-100"}`} />
-              <span className={`absolute left-0 top-[10px] h-[1.5px] w-3 bg-current transition-all ${open ? "-translate-y-[5px] -rotate-45" : ""}`} />
-            </span>
-          </button>
-        </div>
+              <span className={`relative flex h-11 w-11 items-center justify-center rounded-[14px] ${item.bg} text-[#111] shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_3px_8px_rgba(0,0,0,0.15)]`}>
+                <span className="pointer-events-none absolute inset-0 rounded-[14px] bg-gradient-to-b from-white/50 via-white/10 to-transparent" aria-hidden />
+                <Icon size={22} weight="fill" aria-hidden className="relative" />
+                {item.badge && <span className="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-[#E53935] text-[11px] font-bold text-white ring-2 ring-white">{item.badge}</span>}
+              </span>
+            </MotionLink>
+          );
+        })}
       </div>
-
-      {open && (
-        <div id="mobile-nav" className="border-t border-border bg-white px-4 py-4 lg:hidden">
-          <div className="flex flex-col gap-1">
-            {LINKS.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="rounded-[6px] px-3 py-3 text-[15px] font-medium text-text hover:bg-bg-subtle active:bg-bg-subtle"
-              >
-                {l.label}
-              </Link>
-            ))}
-            <Link
-              href="#contact"
-              onClick={() => setOpen(false)}
-              className="mt-2 inline-flex min-h-[44px] items-center justify-center rounded-[6px] bg-text px-4 py-3 text-[14px] font-medium text-white"
-            >
-              Contact
-            </Link>
-          </div>
-        </div>
-      )}
-    </header>
+    </motion.nav>
   );
 }
